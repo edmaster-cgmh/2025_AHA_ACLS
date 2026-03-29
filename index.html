@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2025 AHA ACLS 指引 — 最新更新與重點解析</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C0392B;
+    --red-dark: #922B21;
+    --red-light: #E74C3C;
+    --cream: #FAF7F2;
+    --ink: #1A1008;
+    --ink-soft: #3D2B1F;
+    --gold: #C9A84C;
+    --gold-light: #F0D080;
+    --gray: #8C7B6E;
+    --gray-light: #EDE8E0;
+    --white: #FFFFFF;
+    --border: #D4C8B8;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--ink);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(192,57,43,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(201,168,76,0.1) 0%, transparent 50%);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-ecg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    opacity: 0.15;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(192,57,43,0.2);
+    border: 1px solid rgba(192,57,43,0.5);
+    color: #F08070;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 32px;
+    font-family: 'DM Mono', monospace;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: #F08070;
+    border-radius: 50%;
+    animation: pulse-dot 1.5s infinite;
+  }
+  @keyframes pulse-dot {
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:0.4;transform:scale(0.6)}
+  }
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(42px, 7vw, 88px);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--white);
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+  .hero h1 .accent { color: var(--red-light); }
+  .hero h1 .year {
+    font-family: 'DM Mono', monospace;
+    color: var(--gold);
+    font-size: 0.75em;
+    vertical-align: super;
+  }
+  .hero-subtitle {
+    font-size: clamp(16px, 2vw, 20px);
+    color: rgba(255,255,255,0.55);
+    margin-top: 20px;
+    max-width: 540px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-meta-item .label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 4px;
+  }
+  .hero-meta-item .value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.25);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    animation: bounce 2.5s infinite;
+  }
+  .scroll-hint svg { opacity: 0.4; }
+  @keyframes bounce {
+    0%,100%{transform:translateX(-50%) translateY(0)}
+    50%{transform:translateX(-50%) translateY(8px)}
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(26,16,8,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 0;
+    list-style: none;
+  }
+  .nav-links a {
+    display: block;
+    padding: 0 16px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    height: 56px;
+    line-height: 56px;
+    transition: color 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 40px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--red);
+    opacity: 0.4;
+  }
+  h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .section-intro {
+    font-size: 17px;
+    color: var(--gray);
+    line-height: 1.8;
+    max-width: 640px;
+    margin-bottom: 60px;
+  }
+
+  /* ── OVERVIEW ── */
+  .overview { background: var(--cream); }
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .overview-card {
+    background: var(--white);
+    padding: 36px 32px;
+    position: relative;
+  }
+  .overview-card:nth-child(1) { grid-column: 1/-1; background: var(--ink); color: var(--white); }
+  .overview-card .card-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .overview-card:nth-child(1) .card-num { color: rgba(255,255,255,0.3); }
+  .overview-card h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .overview-card p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--gray);
+  }
+  .overview-card:nth-child(1) p { color: rgba(255,255,255,0.6); }
+  .overview-card:nth-child(1) h3 { color: var(--gold); font-size: 24px; }
+  .release-tag {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+
+  /* ── CHANGES ── */
+  .changes { background: var(--ink); color: var(--white); }
+  .changes h2 { color: var(--white); }
+  .changes .section-intro { color: rgba(255,255,255,0.45); }
+  .changes-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .change-item {
+    background: var(--ink);
+    padding: 36px 32px;
+    position: relative;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .change-item:hover { background: #2A1A10; }
+  .change-item::before {
+    content: attr(data-num);
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 48px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+  }
+  .change-icon {
+    width: 40px; height: 40px;
+    background: rgba(192,57,43,0.15);
+    border: 1px solid rgba(192,57,43,0.3);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: var(--red-light);
+    font-size: 18px;
+  }
+  .change-item h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .change-item p {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.45);
+  }
+  .change-tag {
+    display: inline-block;
+    margin-top: 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid;
+    border-radius: 2px;
+  }
+  .tag-new { color: #52D68A; border-color: rgba(82,214,138,0.3); }
+  .tag-revised { color: var(--gold-light); border-color: rgba(240,208,128,0.3); }
+  .tag-emphasis { color: #7EC8E3; border-color: rgba(126,200,227,0.3); }
+
+  /* ── ALGORITHMS ── */
+  .algorithms { background: #F5F0E8; }
+  .algo-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .algo-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 28px 24px;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .algo-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+  .algo-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+  }
+  .algo-card.cardiac::after { background: var(--red); }
+  .algo-card.brady::after { background: #2980B9; }
+  .algo-card.tachy::after { background: #8E44AD; }
+  .algo-card.postarrest::after { background: var(--gold); }
+  .algo-card.stroke::after { background: #27AE60; }
+  .algo-card.hs::after { background: var(--gray); }
+  .algo-card h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .algo-card p { font-size: 13px; color: var(--gray); line-height: 1.7; }
+  .algo-card .algo-steps {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .algo-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .step-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--gray-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── DRUGS ── */
+  .drugs { background: var(--cream); }
+  .drug-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  .drug-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .drug-table th {
+    background: var(--ink);
+    color: var(--gold);
+    padding: 14px 20px;
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .drug-table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .drug-table tr:last-child td { border-bottom: none; }
+  .drug-table tr:hover td { background: #F5EFE6; }
+  .drug-name {
+    font-weight: 700;
+    font-family: 'Noto Serif TC', serif;
+    color: var(--ink);
+  }
+  .dose-badge {
+    display: inline-block;
+    background: rgba(192,57,43,0.08);
+    color: var(--red-dark);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    border: 1px solid rgba(192,57,43,0.15);
+  }
+  .update-badge {
+    display: inline-block;
+    background: rgba(82,214,138,0.1);
+    color: #2E8B57;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 2px;
+    border: 1px solid rgba(82,214,138,0.25);
+    letter-spacing: 1px;
+  }
+
+  /* ── CHAIN ── */
+  .chain-section { background: #F5F0E8; }
+  .chain-visual {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    flex-wrap: wrap;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .chain-link {
+    flex: 1;
+    min-width: 140px;
+    padding: 28px 20px;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+  }
+  .chain-link:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: var(--border);
+    z-index: 2;
+    background: var(--white);
+    padding: 4px;
+  }
+  .chain-link .chain-icon {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 12px;
+    flex-shrink: 0;
+  }
+  .chain-link h4 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .chain-link p { font-size: 11px; color: var(--gray); line-height: 1.5; }
+  .chain-link .chain-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: rgba(0,0,0,0.2);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .chain-link.unified {
+    background: var(--ink);
+    flex: 0 0 100%;
+    flex-direction: row;
+    text-align: left;
+    gap: 16px;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .chain-link.unified h4 { color: var(--gold); margin-bottom: 4px; }
+  .chain-link.unified p { color: rgba(255,255,255,0.45); }
+
+  /* ── DOWNLOAD ── */
+  .download-section {
+    background: linear-gradient(135deg, var(--red-dark) 0%, #7B0000 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .download-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .download-section .container {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .download-left h2 { color: var(--white); margin-bottom: 16px; }
+  .download-left p { color: rgba(255,255,255,0.6); font-size: 16px; line-height: 1.8; margin-bottom: 28px; }
+  .download-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .dmeta {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+  }
+  .download-right {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 36px;
+  }
+  .download-file-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .download-file-item:last-of-type { border-bottom: none; }
+  .file-icon {
+    width: 44px; height: 44px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .file-info { flex: 1; }
+  .file-name {
+    font-weight: 700;
+    color: var(--white);
+    font-size: 14px;
+    margin-bottom: 3px;
+  }
+  .file-desc { font-size: 12px; color: rgba(255,255,255,0.4); }
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+  .btn-download:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-download-main {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--white);
+    color: var(--red-dark);
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px 28px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .btn-download-main:hover { background: var(--cream); transform: translateY(-2px); }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 24px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 3px;
+    text-decoration: none;
+    transition: all 0.2s;
+    margin-left: 16px;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+
+  /* ── CERTIFICATION ── */
+  .cert-section { background: var(--cream); }
+  .cert-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 48px;
+  }
+  .cert-card {
+    background: var(--white);
+    padding: 32px;
+  }
+  .cert-card .cert-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .cert-card h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .cert-card p { font-size: 13px; color: var(--gray); line-height: 1.7; }
+  .cert-highlight {
+    margin-top: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--red);
+    font-weight: 500;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.35);
+    padding: 48px 40px;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .footer-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 20px;
+    color: var(--white);
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .disclaimer {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-left: 3px solid var(--red);
+    border-radius: 2px;
+    padding: 16px 20px;
+    font-size: 12px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.3);
+    margin-top: 24px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(30px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .hero-content > * {
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero-content > *:nth-child(1){ animation-delay:.1s }
+  .hero-content > *:nth-child(2){ animation-delay:.2s }
+  .hero-content > *:nth-child(3){ animation-delay:.3s }
+  .hero-content > *:nth-child(4){ animation-delay:.4s }
+
+  @media(max-width:768px){
+    section { padding: 64px 20px; }
+    .hero-content { padding: 60px 20px 100px; }
+    .overview-grid { grid-template-columns: 1fr; }
+    .download-section .container { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .chain-visual { flex-direction: column; }
+    .chain-link:not(:last-child)::after { content:'↓'; right:50%; top:auto; bottom:-14px; transform:translateX(50%); }
+    nav { display:none; }
+    .btn-secondary { margin-left:0; margin-top:12px; display:flex; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">ACLS 2025</a>
+    <ul class="nav-links">
+      <li><a href="#overview">概覽</a></li>
+      <li><a href="#changes">更新重點</a></li>
+      <li><a href="#algorithms">演算法</a></li>
+      <li><a href="#drugs">藥物</a></li>
+      <li><a href="#chain">生命鏈</a></li>
+      <li><a href="#download">下載手冊</a></li>
+      <li><a href="#certification">認證</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">2025 AHA 最新發布 · 生效中</div>
+    <h1>
+      <span class="accent">ACLS</span><span class="year">2025</span><br>
+      心臟救命<br>新指引
+    </h1>
+    <p class="hero-subtitle">
+      美國心臟協會（AHA）於 2025 年 10 月 22 日正式發布最新版
+      CPR 與緊急心血管照護（ECC）指引，
+      是繼 2020 年版後最大幅度的更新。
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="label">發布日期</span>
+        <span class="value">2025.10.22</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">有效至</span>
+        <span class="value">2030</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">距上次更新</span>
+        <span class="value">5 年</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">適用課程</span>
+        <span class="value">ACLS / BLS / PALS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ECG Line SVG decoration -->
+  <svg class="hero-ecg" viewBox="0 0 1400 120" preserveAspectRatio="none" fill="none">
+    <polyline stroke="#C0392B" stroke-width="1.5" fill="none"
+      points="0,80 100,80 120,80 130,20 145,100 160,20 175,80 200,80 250,80 270,80 280,10 295,95 310,10 320,80 400,80 430,80 440,25 455,90 470,25 480,80 600,80 640,80 650,15 665,95 680,15 690,80 800,80 840,80 850,20 865,100 880,20 890,80 1000,80 1040,80 1050,18 1065,98 1080,18 1090,80 1200,80 1240,80 1250,22 1265,95 1280,22 1290,80 1400,80"/>
+  </svg>
+  <div class="scroll-hint">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+      <path d="M10 14L4 8h12l-6 6z"/>
+    </svg>
+    SCROLL
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="overview" id="overview">
+  <div class="container">
+    <div class="section-label">背景介紹</div>
+    <h2>2025 指引概覽</h2>
+    <p class="section-intro">
+      本次更新涵蓋成人高級心臟救命術（ACLS）的所有核心面向，
+      在既有 2020 年版架構上精煉演算法、更新藥物時機、強化團隊績效要求。
+    </p>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="release-tag">正式生效 — 2025.10.22</div>
+        <h3>什麼是 2025 AHA ACLS 指引？</h3>
+        <p>
+          美國心臟協會每約五年彙整全球最新復甦科學證據，修訂 ACLS 指引。
+          2025 年版整合國際復甦醫學聯絡委員會（ILCOR）系統性文獻回顧、
+          AHA 品質改善登錄資料庫及多項隨機對照試驗的最新成果，
+          目標在提升心臟驟停存活率、改善神經學預後，並簡化臨床決策流程。
+          從 2026 年 3 月 1 日起，所有 AHA 認證課程須依新版指引授課。
+        </p>
+      </div>
+      <div class="overview-card">
+        <div class="card-num">01</div>
+        <h3>🎯 核心宗旨</h3>
+        <p>精煉演算法以貼近實際臨床場景；強調高品質 CPR 持續性；
+        整合生理監測（EtCO₂、動脈壓）以即時優化急救效果。</p>
+      </div>
+      <div class="overview-card">
+        <div class="card-num">02</div>
+        <h3>📋 證據等級架構</h3>
+        <p>每條建議均標示推薦等級（Class I–III）與證據等級（LOE A/B/C），
+        讓臨床人員掌握各項措施的科學依據強度。</p>
+      </div>
+      <div class="overview-card">
+        <div class="card-num">03</div>
+        <h3>🔄 過渡時間表</h3>
+        <p>2025 年 10 月 22 日指引發布後，90 天過渡期內 AHA 教師
+        須完成 Instructor Update 課程；2026 年 3 月 1 日起強制採用新版教材。</p>
+      </div>
+      <div class="overview-card">
+        <div class="card-num">04</div>
+        <h3>📅 有效期間</h3>
+        <p>本版指引預計沿用至 2030 年 AHA 下次全面性修訂。
+        期間若有重要新證據，AHA 將發布 Errata 或聚焦性更新補充。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY CHANGES -->
+<section class="changes" id="changes">
+  <div class="container">
+    <div class="section-label" style="color:#F08070">主要更新</div>
+    <h2>2025 版八大核心變更</h2>
+    <p class="section-intro">
+      相較 2020 年版，本次更新在以下面向有顯著精煉，
+      若您已持有 2020 版認證，這些差異是再認證課程的重中之重。
+    </p>
+    <div class="changes-list">
+
+      <div class="change-item" data-num="01">
+        <div class="change-icon">⛓️</div>
+        <h3>統一生命鏈</h3>
+        <p>以單一整合型「生命鏈」取代院內與院外的兩套鏈結，
+        成人與兒科共用同一心理模型，降低跨場域混淆。</p>
+        <span class="change-tag tag-new">NEW</span>
+      </div>
+
+      <div class="change-item" data-num="02">
+        <div class="change-icon">💊</div>
+        <h3>Epinephrine 給藥時機精修</h3>
+        <p>更新不可電擊節律（Asystole/PEA）中腎上腺素的
+        給藥時機與間隔建議，強調盡速給予第一劑。
+        VF/pVT 流程亦對藥物順序有更精確說明。</p>
+        <span class="change-tag tag-revised">REVISED</span>
+      </div>
+
+      <div class="change-item" data-num="03">
+        <div class="change-icon">🫁</div>
+        <h3>通氣管理——避免過度換氣</h3>
+        <p>強調在 CPR 過程中維持生理適當的含氧量與換氣量，
+        明確設定通氣頻率上限以避免 hyperventilation 對腦灌流的負面影響。</p>
+        <span class="change-tag tag-emphasis">EMPHASIS</span>
+      </div>
+
+      <div class="change-item" data-num="04">
+        <div class="change-icon">❤️‍🔥</div>
+        <h3>心動過緩 / 心動過速演算法更新</h3>
+        <p>新增穩定與不穩定心律的臨床閾值判斷標準，
+        減少快速評估時的模糊地帶，
+        明確何時需立即電擊、何時可先藥物處理。</p>
+        <span class="change-tag tag-revised">REVISED</span>
+      </div>
+
+      <div class="change-item" data-num="05">
+        <div class="change-icon">🧠</div>
+        <h3>心臟驟停後照護強化</h3>
+        <p>將心臟驟停後照護定位為「復甦的延續」而非事後補救。
+        更新目標溫度管理（TTM）策略、呼吸與血壓參數、
+        及加護病房管理細節。</p>
+        <span class="change-tag tag-revised">REVISED</span>
+      </div>
+
+      <div class="change-item" data-num="06">
+        <div class="change-icon">👥</div>
+        <h3>人因與團隊動態成為核心</h3>
+        <p>2025 版將人因（Human Factors）正式納入 ACLS 核心教學，
+        包括閉環溝通（Closed-loop Communication）、
+        角色透明度與適應性領導，強調非技術技能。</p>
+        <span class="change-tag tag-new">NEW EMPHASIS</span>
+      </div>
+
+      <div class="change-item" data-num="07">
+        <div class="change-icon">📊</div>
+        <h3>生理監測融入 CPR 品質評估</h3>
+        <p>推薦使用 End-tidal CO₂（EtCO₂）監測評估 CPR 品質
+        及偵測自發性循環恢復（ROSC）；
+        考慮動脈壓監測以優化胸壓品質與血管加壓劑治療。</p>
+        <span class="change-tag tag-emphasis">EMPHASIS</span>
+      </div>
+
+      <div class="change-item" data-num="08">
+        <div class="change-icon">🩺</div>
+        <h3>腦中風演算法——溶栓藥物更新</h3>
+        <p>腦中風演算法新增溶栓藥物（Thrombolytic Agent）的使用指示，
+        明確在疑似或確認肺栓塞引起心臟驟停時的處置順序。</p>
+        <span class="change-tag tag-new">NEW</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ALGORITHMS -->
+<section class="algorithms" id="algorithms">
+  <div class="container">
+    <div class="section-label">臨床演算法</div>
+    <h2>核心演算法一覽</h2>
+    <p class="section-intro">
+      2025 版各演算法以模組化「知識塊（Knowledge Chunks）」架構呈現，
+      每個模組含建議表格、簡述、依據及文獻連結。
+    </p>
+    <div class="algo-cards">
+
+      <div class="algo-card cardiac">
+        <h3>💓 成人心臟驟停 (VF/pVT)</h3>
+        <p>不可電擊節律（PEA / Asystole）與可電擊節律的分流處置</p>
+        <div class="algo-steps">
+          <div class="algo-step"><div class="step-dot">1</div><span>確認無反應、無呼吸 → 啟動急救系統</span></div>
+          <div class="algo-step"><div class="step-dot">2</div><span>立即開始高品質 CPR（100–120 次/分，深度 ≥5 cm）</span></div>
+          <div class="algo-step"><div class="step-dot">3</div><span>盡快 AED/除顫器到位 → 分析節律</span></div>
+          <div class="algo-step"><div class="step-dot">4</div><span>VF/pVT：電擊 → CPR 2分鐘 → 再次評估</span></div>
+          <div class="algo-step"><div class="step-dot">5</div><span>Epinephrine 1 mg IV/IO（每 3–5 分鐘）</span></div>
+          <div class="algo-step"><div class="step-dot">6</div><span>持續治療 H's & T's（可逆原因）</span></div>
+        </div>
+      </div>
+
+      <div class="algo-card brady">
+        <h3>📉 症狀性心動過緩</h3>
+        <p>HR &lt;50 bpm 伴血動力學不穩定或症狀</p>
+        <div class="algo-steps">
+          <div class="algo-step"><div class="step-dot">1</div><span>確認症狀（低血壓、胸痛、昏厥、急性心衰）</span></div>
+          <div class="algo-step"><div class="step-dot">2</div><span>Atropine 0.5 mg IV（首選；最大 3 mg）</span></div>
+          <div class="algo-step"><div class="step-dot">3</div><span>無效 → Dopamine 或 Epinephrine 靜脈滴注</span></div>
+          <div class="algo-step"><div class="step-dot">4</div><span>考慮經皮心臟節律器（TCP）</span></div>
+          <div class="algo-step"><div class="step-dot">5</div><span>尋找並治療可逆原因</span></div>
+        </div>
+      </div>
+
+      <div class="algo-card tachy">
+        <h3>📈 症狀性心動過速</h3>
+        <p>HR &gt;150 bpm 伴血動力學不穩定</p>
+        <div class="algo-steps">
+          <div class="algo-step"><div class="step-dot">1</div><span>不穩定（低血壓、意識改變等）→ 立即同步電擊</span></div>
+          <div class="algo-step"><div class="step-dot">2</div><span>穩定 → 判斷 QRS 寬窄、規則性</span></div>
+          <div class="algo-step"><div class="step-dot">3</div><span>窄 QRS 規則 → Adenosine 6 mg IV（可重複）</span></div>
+          <div class="algo-step"><div class="step-dot">4</div><span>寬 QRS → Amiodarone 或 Procainamide</span></div>
+          <div class="algo-step"><div class="step-dot">5</div><span>2025 更新：穩定 vs 不穩定判定閾值更明確</span></div>
+        </div>
+      </div>
+
+      <div class="algo-card postarrest">
+        <h3>🏥 心臟驟停後照護</h3>
+        <p>ROSC 後的系統性照護（2025 版重點強化）</p>
+        <div class="algo-steps">
+          <div class="algo-step"><div class="step-dot">1</div><span>目標 SpO₂ 92–98%；避免低氧或高氧</span></div>
+          <div class="algo-step"><div class="step-dot">2</div><span>血壓維持：SBP ≥90 mmHg，MAP ≥65 mmHg</span></div>
+          <div class="algo-step"><div class="step-dot">3</div><span>12-lead ECG → 懷疑 STEMI 考慮緊急心導管</span></div>
+          <div class="algo-step"><div class="step-dot">4</div><span>TTM：目標體溫 32–36°C（更新策略）</span></div>
+          <div class="algo-step"><div class="step-dot">5</div><span>神經學預後評估 ≥72 小時後進行</span></div>
+        </div>
+      </div>
+
+      <div class="algo-card stroke">
+        <h3>🧠 急性腦中風</h3>
+        <p>含 2025 新增溶栓藥物節點</p>
+        <div class="algo-steps">
+          <div class="algo-step"><div class="step-dot">1</div><span>FAST 識別 → 啟動腦中風小組</span></div>
+          <div class="algo-step"><div class="step-dot">2</div><span>CT 排除出血性中風</span></div>
+          <div class="algo-step"><div class="step-dot">3</div><span>符合條件 → tPA（Alteplase）靜脈溶栓</span></div>
+          <div class="algo-step"><div class="step-dot">4</div><span>2025 新增：PE 引起心臟驟停時溶栓流程</span></div>
+          <div class="algo-step"><div class="step-dot">5</div><span>大血管阻塞考慮機械取栓（EVT）</span></div>
+        </div>
+      </div>
+
+      <div class="algo-card hs">
+        <h3>🔍 H's & T's 可逆原因</h3>
+        <p>使用 POCUS 輔助快速診斷</p>
+        <div class="algo-steps">
+          <div class="algo-step"><div class="step-dot">H</div><span>低血容 / 低氧血症 / 酸血症 / 低/高血鉀 / 低溫</span></div>
+          <div class="algo-step"><div class="step-dot">T</div><span>張力性氣胸 / 心包填塞 / 毒素 / PE / 心肌梗塞</span></div>
+          <div class="algo-step"><div class="step-dot">📡</div><span>床旁超音波（POCUS）評估心包積液、右心擴大</span></div>
+          <div class="algo-step"><div class="step-dot">💉</div><span>PE 確認 → 考慮 Alteplase 50–100 mg IV</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DRUGS -->
+<section class="drugs" id="drugs">
+  <div class="container">
+    <div class="section-label">藥物摘要</div>
+    <h2>關鍵藥物 ─ 2025 更新</h2>
+    <p class="section-intro">
+      以下為 ACLS 常用藥物與 2025 版相關更新摘要，供快速參考。
+      實際給藥前請核對完整指引與臨床情況。
+    </p>
+    <div class="drug-table-wrap">
+      <table class="drug-table">
+        <thead>
+          <tr>
+            <th>藥物</th>
+            <th>適應症</th>
+            <th>劑量 / 給法</th>
+            <th>2025 更新要點</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="drug-name">Epinephrine（腎上腺素）</span></td>
+            <td>心臟驟停 (PEA/Asystole/VF/pVT)</td>
+            <td><span class="dose-badge">1 mg IV/IO</span><br>每 3–5 分鐘</td>
+            <td>不可電擊節律中強調盡早給予第一劑；VF/pVT 給藥時序精修 <span class="update-badge">UPDATED</span></td>
+          </tr>
+          <tr>
+            <td><span class="drug-name">Amiodarone（胺碘酮）</span></td>
+            <td>頑固性 VF / pVT</td>
+            <td><span class="dose-badge">300 mg IV</span><br>第二劑 150 mg</td>
+            <td>仍為 Class IIb；無新的強力證據改變現行建議</td>
+          </tr>
+          <tr>
+            <td><span class="drug-name">Lidocaine（利多卡因）</span></td>
+            <td>頑固性 VF / pVT（Amiodarone 替代）</td>
+            <td><span class="dose-badge">1–1.5 mg/kg IV</span></td>
+            <td>維持為可接受替代選擇；可用於 Amiodarone 不可用或禁忌時</td>
+          </tr>
+          <tr>
+            <td><span class="drug-name">Atropine</span></td>
+            <td>症狀性心動過緩</td>
+            <td><span class="dose-badge">0.5 mg IV</span><br>最大 3 mg</td>
+            <td>仍為第一線藥物；2025 版強化穩定 vs 不穩定判定標準</td>
+          </tr>
+          <tr>
+            <td><span class="drug-name">Adenosine</span></td>
+            <td>窄 QRS 規則性心搏過速（SVT）</td>
+            <td><span class="dose-badge">6 mg IV（首劑）</span><br>12 mg（重複）</td>
+            <td>給藥技術要求（快速推注 + 20 mL 生理鹽水沖管）不變</td>
+          </tr>
+          <tr>
+            <td><span class="drug-name">Alteplase（tPA）</span></td>
+            <td>急性缺血性腦中風；疑似 PE 引起心臟驟停</td>
+            <td><span class="dose-badge">0.9 mg/kg IV（腦中風）</span><br><span class="dose-badge">50–100 mg IV（PE）</span></td>
+            <td>2025 版腦中風演算法新增此藥物節點；PE 溶栓建議更明確 <span class="update-badge">NEW</span></td>
+          </tr>
+          <tr>
+            <td><span class="drug-name">Naloxone（納洛酮）</span></td>
+            <td>疑似阿片類藥物過量（呼吸 / 心臟驟停）</td>
+            <td><span class="dose-badge">0.4–2 mg IV/IM/IN</span></td>
+            <td>BLS 演算法明確標示 Naloxone 給藥節點；供阿片類藥物過量場景使用 <span class="update-badge">NEW</span></td>
+          </tr>
+          <tr>
+            <td><span class="drug-name">Dopamine / Norepinephrine</span></td>
+            <td>心臟驟停後低血壓；症狀性心動過緩</td>
+            <td>依體重調整滴定</td>
+            <td>心臟驟停後照護血壓目標更明確（MAP ≥65 mmHg）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CHAIN OF SURVIVAL -->
+<section class="chain-section" id="chain">
+  <div class="container">
+    <div class="section-label">生命鏈</div>
+    <h2>2025 統一生命鏈</h2>
+    <p class="section-intro">
+      2025 年版最重要的架構變革之一：以「單一整合型生命鏈」
+      統整成人及兒科、院內及院外心臟驟停，使跨場域的應變心理模型一致。
+    </p>
+    <div class="chain-visual">
+      <div class="chain-link unified">
+        <div class="chain-icon" style="background:rgba(192,57,43,0.3);color:var(--red-light);font-size:24px">🔗</div>
+        <div>
+          <h4>2025 統一生命鏈 — 院內 & 院外 / 成人 & 兒科共用</h4>
+          <p>此為 2025 版最關鍵的架構性更新：不再區分院內/院外兩套鏈結，改為統一心理模型</p>
+        </div>
+      </div>
+      <div class="chain-link">
+        <div class="chain-icon" style="background:#FDEBD0;color:#E67E22">🚨</div>
+        <div class="chain-num">LINK 1</div>
+        <h4>早期識別與求救</h4>
+        <p>立刻辨識心臟驟停徵兆，啟動緊急醫療系統（EMS）</p>
+      </div>
+      <div class="chain-link">
+        <div class="chain-icon" style="background:#FDEDEC;color:#E74C3C">🤲</div>
+        <div class="chain-num">LINK 2</div>
+        <h4>立即高品質 CPR</h4>
+        <p>旁觀者 CPR 最大化；強調 100–120/min、深度 ≥5 cm、完全回彈</p>
+      </div>
+      <div class="chain-link">
+        <div class="chain-icon" style="background:#EBF5FB;color:#2980B9">⚡</div>
+        <div class="chain-num">LINK 3</div>
+        <h4>快速去顫</h4>
+        <p>AED 盡早到位；對可電擊節律在最短中斷下實施電擊</p>
+      </div>
+      <div class="chain-link">
+        <div class="chain-icon" style="background:#EAF7F0;color:#27AE60">🚑</div>
+        <div class="chain-num">LINK 4</div>
+        <h4>高級急救與 ACLS</h4>
+        <p>EMS 或院內急救團隊接手；藥物、進階氣道管理</p>
+      </div>
+      <div class="chain-link">
+        <div class="chain-icon" style="background:#F4ECF7;color:#8E44AD">🏥</div>
+        <div class="chain-num">LINK 5</div>
+        <h4>心臟驟停後照護</h4>
+        <p>TTM、血壓目標、冠狀動脈評估、神經學監測</p>
+      </div>
+      <div class="chain-link">
+        <div class="chain-icon" style="background:#F8F9FA;color:var(--gold)">♻️</div>
+        <div class="chain-num">LINK 6</div>
+        <h4>康復與回歸</h4>
+        <p>長期神經學、心理和功能性康復；支持倖存者及家屬</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section class="download-section" id="download">
+  <div class="container">
+    <div class="download-left">
+      <div class="section-label" style="color:rgba(255,255,255,0.4)">學習資源</div>
+      <h2>下載 ACLS 手冊</h2>
+      <p>
+        點擊下方按鈕下載 2026 年更新版 ACLS Manual（HTML 格式），
+        內含完整演算法、藥物速查表、Megacode 情境與 H's &amp; T's 口訣，
+        適合臨床人員隨時查閱複習。
+      </p>
+      <div class="download-meta">
+        <span class="dmeta">2026 更新版</span>
+        <span class="dmeta">HTML 格式</span>
+        <span class="dmeta">含演算法圖示</span>
+        <span class="dmeta">繁體中文</span>
+      </div>
+      <a href="ACLS_Manual/2026_ACLS_Manual.html" class="btn-download-main" download>
+        ⬇ 下載 ACLS Manual 2026
+      </a>
+      <a href="https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines" target="_blank" rel="noopener" class="btn-secondary">
+        🔗 AHA 官方指引網站
+      </a>
+    </div>
+    <div class="download-right">
+      <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:20px;">可下載資源</div>
+
+      <div class="download-file-item">
+        <div class="file-icon">📄</div>
+        <div class="file-info">
+          <div class="file-name">2026 ACLS Manual</div>
+          <div class="file-desc">完整手冊 · HTML · 含演算法 &amp; 藥物表</div>
+        </div>
+        <a href="ACLS_Manual/2026_ACLS_Manual.html" class="btn-download" download>下載</a>
+      </div>
+
+      <div class="download-file-item">
+        <div class="file-icon">❤️</div>
+        <div class="file-info">
+          <div class="file-name">AHA 官方演算法</div>
+          <div class="file-desc">2025 版官方演算法圖 · 官方網站</div>
+        </div>
+        <a href="https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/algorithms" target="_blank" rel="noopener" class="btn-download">前往</a>
+      </div>
+
+      <div class="download-file-item">
+        <div class="file-icon">📰</div>
+        <div class="file-info">
+          <div class="file-name">Circulation 原文論文</div>
+          <div class="file-desc">Part 9: Adult ALS · AHA Journals</div>
+        </div>
+        <a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000001376" target="_blank" rel="noopener" class="btn-download">閱讀</a>
+      </div>
+
+      <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:12px;color:rgba(255,255,255,0.25);line-height:1.6;">
+        ⚠ 本手冊僅供教育與參考用途，實際臨床決策應以 AHA 官方完整指引為準。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATION -->
+<section class="cert-section" id="certification">
+  <div class="container">
+    <div class="section-label">認證資訊</div>
+    <h2>ACLS 認證 ─ 重要事項</h2>
+    <p class="section-intro">
+      無論是初次取證或是更新認證，瞭解 2025 版課程的新要求，
+      確保您的訓練與最新臨床標準一致。
+    </p>
+    <div class="cert-cards">
+      <div class="cert-card">
+        <span class="cert-icon">🎓</span>
+        <h3>初次認證</h3>
+        <p>完成 AHA 認可的 HeartCode ACLS 或教室課程（含 Megacode）。
+        需通過技能評量站及筆試（通過標準 84 分）。</p>
+        <div class="cert-highlight">有效期 2 年</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">🔄</span>
+        <h3>再認證</h3>
+        <p>有效期到期前完成 ACLS Renewal 課程（較短時數），
+        包含 2025 版更新的演算法情境與 Megacode。</p>
+        <div class="cert-highlight">到期前完成即可延續</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">👨‍🏫</span>
+        <h3>教師更新要求</h3>
+        <p>2025 年 10 月 22 日後，所有 AHA ACLS 教師
+        須在 90 天過渡期內完成 Instructor Update 課程。
+        2026 年 3 月 1 日起強制使用新版教材授課。</p>
+        <div class="cert-highlight">2026.03.01 強制生效</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">💻</span>
+        <h3>混合式學習（Blended）</h3>
+        <p>HeartCode 提供線上自學（認知）+ 到校技能（Hands-on Session），
+        兼顧彈性與品質。適合繁忙的臨床工作人員。</p>
+        <div class="cert-highlight">線上 + 現場模式</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">📝</span>
+        <h3>Megacode 情境更新</h3>
+        <p>2025 版 Megacode 更強調動態場景、即時決策、
+        團隊溝通與領導評估，不再只是按步驟操作演算法。</p>
+        <div class="cert-highlight">非技術技能納入評分</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">📡</span>
+        <h3>即時回饋設備</h3>
+        <p>2025 版建議在訓練中使用提供壓頻、深度及回彈即時數據的
+        CPR 回饋裝置，協助學員建立正確肌肉記憶。</p>
+        <div class="cert-highlight">品質導向訓練</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">ACLS 2025</div>
+      <p>
+        2025 AHA ACLS 指引介紹網頁<br>
+        基於美國心臟協會 2025 CPR &amp; ECC 指引（2025 年 10 月 22 日發布）
+      </p>
+      <p style="margin-top:12px">
+        官方資源：<a href="https://cpr.heart.org" target="_blank">cpr.heart.org</a> ·
+        原文論文：<a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000001376" target="_blank">Circulation 2025</a>
+      </p>
+    </div>
+    <div>
+      <div class="disclaimer">
+        ⚠️ 免責聲明：本網頁內容僅供醫療教育與快速參考用途，並非官方 AHA 出版品。
+        所有臨床決策應以 AHA 官方完整指引（cpr.heart.org）及您所在機構的標準作業流程為準。
+        本網頁與美國心臟協會無任何隸屬或授權關係。
+      </div>
+      <p style="margin-top:16px;font-size:11px;font-family:'DM Mono',monospace;letter-spacing:1px;">
+        © 2026 · 內容依據 AHA 2025 CPR & ECC Guidelines
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
