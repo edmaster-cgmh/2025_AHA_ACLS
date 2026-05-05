@@ -714,6 +714,104 @@
     font-weight: 500;
   }
 
+  /* ── DISCUSSION RESOURCES (NEW) ── */
+  .discussion-section { background: var(--ink); color: var(--white); }
+  .discussion-section h2 { color: var(--white); }
+  .discussion-section .section-intro { color: rgba(255,255,255,0.45); }
+
+  .discussion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .discussion-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .discussion-card:hover {
+    background: rgba(201,168,76,0.08);
+    border-color: rgba(201,168,76,0.3);
+    transform: translateY(-3px);
+  }
+  .discussion-card .dc-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+  }
+  .dc-type.pptx { background: rgba(164,112,224,0.15); color: #C89EF0; border: 1px solid rgba(164,112,224,0.25); }
+  .dc-type.pdf  { background: rgba(224,96,80,0.15);   color: #F09080; border: 1px solid rgba(224,96,80,0.25); }
+  .dc-type.html { background: rgba(80,180,224,0.15);  color: #80D0F0; border: 1px solid rgba(80,180,224,0.25); }
+  .dc-type.img  { background: rgba(80,200,120,0.15);  color: #80E0A0; border: 1px solid rgba(80,200,120,0.25); }
+
+  .discussion-card .dc-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.4;
+  }
+  .discussion-card .dc-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .discussion-card .dc-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-top: 4px;
+    transition: gap 0.2s;
+  }
+  .discussion-card:hover .dc-action { gap: 10px; }
+
+  /* image gallery strip */
+  .img-strip {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .img-thumb {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.5px;
+  }
+  .img-thumb:hover {
+    background: rgba(80,200,120,0.08);
+    border-color: rgba(80,200,120,0.25);
+    color: #80E0A0;
+  }
+
   /* ── FOOTER ── */
   footer {
     background: var(--ink);
@@ -721,6 +819,7 @@
     padding: 48px 40px;
     font-size: 13px;
     line-height: 1.8;
+    border-top: 1px solid rgba(255,255,255,0.06);
   }
   .footer-inner {
     max-width: 1100px;
@@ -775,6 +874,7 @@
     .chain-link:not(:last-child)::after { content:'↓'; right:50%; top:auto; bottom:-14px; transform:translateX(50%); }
     nav { display:none; }
     .btn-secondary { margin-left:0; margin-top:12px; display:flex; }
+    .discussion-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -791,6 +891,7 @@
       <li><a href="#drugs">藥物</a></li>
       <li><a href="#chain">生命鏈</a></li>
       <li><a href="#download">下載手冊</a></li>
+      <li><a href="#discussion">討論資源</a></li>
       <li><a href="#certification">認證</a></li>
     </ul>
   </div>
@@ -1201,18 +1302,19 @@
       <div class="section-label" style="color:rgba(255,255,255,0.4)">學習資源</div>
       <h2>下載 ACLS 手冊</h2>
       <p>
-        點擊下方按鈕下載 2026 年更新版 ACLS Manual（HTML 格式），
+        點擊下方按鈕直接下載 2026 年更新版 ACLS Manual（PDF 格式），
         內含完整演算法、藥物速查表、Megacode 情境與 H's &amp; T's 口訣，
         適合臨床人員隨時查閱複習。
       </p>
       <div class="download-meta">
         <span class="dmeta">2026 更新版</span>
-        <span class="dmeta">HTML 格式</span>
+        <span class="dmeta">PDF 格式</span>
         <span class="dmeta">含演算法圖示</span>
         <span class="dmeta">繁體中文</span>
       </div>
-      <a href="ACLS_Manual/2026_ACLS_Manual.html" class="btn-download-main" download>
-        ⬇ 下載 ACLS Manual 2026
+      <!-- 直接下載 PDF -->
+      <a href="20260509Discussion/2026版_ACLS手冊_final_v4.pdf" class="btn-download-main" download="2026版_ACLS手冊_final_v4.pdf">
+        ⬇ 直接下載 ACLS Manual PDF
       </a>
       <a href="https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines" target="_blank" rel="noopener" class="btn-secondary">
         🔗 AHA 官方指引網站
@@ -1224,10 +1326,28 @@
       <div class="download-file-item">
         <div class="file-icon">📄</div>
         <div class="file-info">
-          <div class="file-name">2026 ACLS Manual</div>
-          <div class="file-desc">完整手冊 · HTML · 含演算法 &amp; 藥物表</div>
+          <div class="file-name">2026版 ACLS 手冊 (PDF)</div>
+          <div class="file-desc">完整手冊 · PDF · 含演算法 &amp; 藥物表</div>
         </div>
-        <a href="ACLS_Manual/2026_ACLS_Manual.html" class="btn-download" download>下載</a>
+        <a href="20260509Discussion/2026版_ACLS手冊_final_v4.pdf" class="btn-download" download="2026版_ACLS手冊_final_v4.pdf">⬇ 下載</a>
+      </div>
+
+      <div class="download-file-item">
+        <div class="file-icon">📊</div>
+        <div class="file-info">
+          <div class="file-name">復甦藍圖簡報 (PPTX)</div>
+          <div class="file-desc">2025 Resuscitation Blueprint · 簡報檔</div>
+        </div>
+        <a href="20260509Discussion/2025_Resuscitation_Blueprint.pptx" class="btn-download" download="2025_Resuscitation_Blueprint.pptx">⬇ 下載</a>
+      </div>
+
+      <div class="download-file-item">
+        <div class="file-icon">🩺</div>
+        <div class="file-info">
+          <div class="file-name">AHA 2025 Clinical Delta (PPTX)</div>
+          <div class="file-desc">臨床差異重點整理 · 簡報檔</div>
+        </div>
+        <a href="20260509Discussion/AHA_2025_Clinical_Delta.pptx" class="btn-download" download="AHA_2025_Clinical_Delta.pptx">⬇ 下載</a>
       </div>
 
       <div class="download-file-item">
@@ -1252,6 +1372,78 @@
         ⚠ 本手冊僅供教育與參考用途，實際臨床決策應以 AHA 官方完整指引為準。
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ══ 20260509 DISCUSSION RESOURCES (NEW SECTION) ══ -->
+<section class="discussion-section" id="discussion">
+  <div class="container">
+    <div class="section-label" style="color:#F08070">20260509 討論資源</div>
+    <h2>討論會資料包</h2>
+    <p class="section-intro">
+      以下資源為 2026 年 5 月 9 日 ACLS 討論會所使用的教學素材，
+      包含簡報、手冊、教學頁面及參考圖片，供與會人員課後複習使用。
+    </p>
+
+    <!-- 主要文件卡片 -->
+    <div class="discussion-grid">
+
+      <a class="discussion-card" href="20260509Discussion/2026版_ACLS手冊_final_v4.pdf" download="2026版_ACLS手冊_final_v4.pdf">
+        <span class="dc-type pdf">📄 PDF</span>
+        <div class="dc-title">2026版 ACLS 手冊 final_v4</div>
+        <div class="dc-desc">完整版 ACLS 教學手冊，含全套演算法、藥物速查表、Megacode 情境與 H's &amp; T's 口訣。</div>
+        <span class="dc-action">⬇ 直接下載 →</span>
+      </a>
+
+      <a class="discussion-card" href="20260509Discussion/2025_Resuscitation_Blueprint.pptx" download="2025_Resuscitation_Blueprint.pptx">
+        <span class="dc-type pptx">📊 PPTX</span>
+        <div class="dc-title">2025 Resuscitation Blueprint</div>
+        <div class="dc-desc">復甦科學藍圖簡報，涵蓋 AHA 2025 版核心架構與教學設計思路，適合教師與進階學員。</div>
+        <span class="dc-action">⬇ 直接下載 →</span>
+      </a>
+
+      <a class="discussion-card" href="20260509Discussion/AHA_2025_Clinical_Delta.pptx" download="AHA_2025_Clinical_Delta.pptx">
+        <span class="dc-type pptx">📊 PPTX</span>
+        <div class="dc-title">AHA 2025 Clinical Delta</div>
+        <div class="dc-desc">系統性整理 2020 → 2025 各演算法的臨床變更差異，快速掌握再認證重點，聚焦更新幅度最大的項目。</div>
+        <span class="dc-action">⬇ 直接下載 →</span>
+      </a>
+
+      <a class="discussion-card" href="20260509Discussion/Topic1.html" target="_blank" rel="noopener">
+        <span class="dc-type html">🌐 HTML</span>
+        <div class="dc-title">Topic 1 教學頁面</div>
+        <div class="dc-desc">互動式教學網頁，Topic 1 主題詳解，含圖示與重點摘要，可直接在瀏覽器中閱讀。</div>
+        <span class="dc-action">🔗 開啟頁面 →</span>
+      </a>
+
+      <a class="discussion-card" href="20260509Discussion/Topic2.html" target="_blank" rel="noopener">
+        <span class="dc-type html">🌐 HTML</span>
+        <div class="dc-title">Topic 2 教學頁面</div>
+        <div class="dc-desc">互動式教學網頁，Topic 2 主題詳解，含圖示與重點摘要，可直接在瀏覽器中閱讀。</div>
+        <span class="dc-action">🔗 開啟頁面 →</span>
+      </a>
+
+      <a class="discussion-card" href="20260509Discussion/Topic3.html" target="_blank" rel="noopener">
+        <span class="dc-type html">🌐 HTML</span>
+        <div class="dc-title">Topic 3 教學頁面</div>
+        <div class="dc-desc">互動式教學網頁，Topic 3 主題詳解，含圖示與重點摘要，可直接在瀏覽器中閱讀。</div>
+        <span class="dc-action">🔗 開啟頁面 →</span>
+      </a>
+
+    </div>
+
+    <!-- 參考圖片列表 -->
+    <div style="margin-top: 8px;">
+      <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:16px;">參考圖片資源</div>
+      <div class="img-strip">
+        <a class="img-thumb" href="20260509Discussion/unnamed (1).png" target="_blank" rel="noopener">🖼 圖片 1</a>
+        <a class="img-thumb" href="20260509Discussion/unnamed (2).png" target="_blank" rel="noopener">🖼 圖片 2</a>
+        <a class="img-thumb" href="20260509Discussion/unnamed (3).png" target="_blank" rel="noopener">🖼 圖片 3</a>
+        <a class="img-thumb" href="20260509Discussion/unnamed (4).png" target="_blank" rel="noopener">🖼 圖片 4</a>
+        <a class="img-thumb" href="20260509Discussion/unnamed (5).png" target="_blank" rel="noopener">🖼 圖片 5</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
